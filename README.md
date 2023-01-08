@@ -1,4 +1,7 @@
 # TODOlist
+Primero que todo tienes que instalar las dependencias con este comando:
+
+`npm install`
 
 Para usar la app tienes que tener nuestra DB y ejecutar localmente el servidor de Node.js, con el siguiente comando podras levantar la app :
 
