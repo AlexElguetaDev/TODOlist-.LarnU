@@ -1,0 +1,26 @@
+<div class="container p-4">
+  <div class="row">
+
+    {{#each lists}}
+        <div class="card p-2 m-2">
+        <div class="card-header">
+          {{timeago created_at}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{title}}</h5>
+          <p class="card-text">{{description}}</p>
+          <a href="/list/delete/{{id}}" class="btn btn-danger">Delete</a>
+          <a href="/list/edit/{{id}}" class="btn btn-secondary">Edit</a>
+          </div>
+        </div>
+    {{else}}
+        <div class="col-md-4 mx-auto">
+          <div class="card card-body text-center">
+            <p>There are not TODO saved yet.</p>
+            <a href="/list/add">Create One!</a>
+          </div>
+        </div>
+    {{/each}}
+
+  </div>
+</div>
