@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const passport = require("passport");
+const pool = require("../database");
+const helpers = require("../lib/helpers");
 const { isLoggedIn, isNotLoggedIn } = require("../lib/auth");
 
 router.get("/signup", isNotLoggedIn, (req, res) => {
@@ -32,6 +34,21 @@ router.post("/signin", isNotLoggedIn, (req, res, next) => {
 
 router.get("/profile", isLoggedIn, (req, res) => {
   res.render("profile");
+});
+
+router.get("/profile/:id", isLoggedIn, async (req, res) => {
+  const { id } = req.params;
+  const user = await pool.query("SELECT * FROM list WHERE id = ?", [id]);
+  res.render("list/editpass", {users : user[0]});
+});
+
+router.post("/profile/:id", isLoggedIn, async (req, res) => {
+  const { id } = req.params;
+  const { password } = req.body;
+  const newPass = await helpers.encryptPassword(password);
+  await pool.query("UPDATE users SET password=? WHERE id=?", [newPass, id]);
+  req.flash("success", "Password Update successfully");
+  res.redirect("/profile");
 });
 
 router.get("/logout", isLoggedIn, (req, res, next) => {

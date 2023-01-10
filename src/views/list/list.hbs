@@ -1,23 +1,44 @@
-<div class="container p-4">
-  <div class="row">
+<div class="container p-4 text-center">
+  <class="list">
+
+    <h1 class="text-center">ADD LIST</h1>
+
+              <div class="card">
+                <div class="card-body">
+                  <form action="/list/add" method="post">
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="title" placeholder="Title" autofocus>
+                    </div>
+                    <div class="form-group">
+                      <textarea name="description" rows="2" class="form-control" placeholder="Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-success btn-block">
+                        Save
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
 
     {{#each lists}}
-        <div class="card p-2 m-2">
-        <div class="card-header">
-          {{timeago created_at}}
-        </div>
+    <div>
+        <div class="card m-2">
         <div class="card-body">
           <h5 class="card-title">{{title}}</h5>
           <p class="card-text">{{description}}</p>
           <a href="/list/delete/{{id}}" class="btn btn-danger">Delete</a>
-          <a href="/list/edit/{{id}}" class="btn btn-secondary">Edit</a>
-          </div>
+          <a href="/list/edit/{{id}}" class="btn btn-warning">Edit</a>
         </div>
+        <div class="card-footer">
+          {{timeago created_at}}
+        </div>
+        </div>
+    </div>
     {{else}}
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-4 m-3 mx-auto">
           <div class="card card-body text-center">
             <p>There are not TODO saved yet.</p>
-            <a href="/list/add">Create One!</a>
           </div>
         </div>
     {{/each}}

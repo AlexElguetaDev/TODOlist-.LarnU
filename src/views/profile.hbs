@@ -1,10 +1,13 @@
-<div class="container p-4">
+<div class="container p-4" style="width: 1200px;">
   <div class="row">
     <div class="col-md-4 mx-auto">
       <div class="card text-center">
         <div class="card-body">
           <h3>Welcome {{user.fullname}}</h3>
-          <h4>{{user.username}}</h4>
+          <a href="profile/{{user.id}}" lass="btn btn-primary m-4">
+            Edit Password
+          </a>
+          <h4>Usename : {{user.username}}</h4>
           <a href="/list" class="btn btn-primary m-4">
             Save your TODO
           </a>

@@ -3,6 +3,9 @@
     <div class="col-md-4 mx-auto">
       <div class="card">
         <div class="card-body">
+          <h4>Editing..</h4>
+          <h2>{{list.title}}</h2>
+          <p>{{list.description}}</p>
           <form action="/list/edit/{{list.id}}" method="post">
             <div class="form-group">
               <input type="text" value="{{list.title}}" class="form-control" name="title" placeholder="Title" autofocus>
