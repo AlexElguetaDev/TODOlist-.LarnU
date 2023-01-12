@@ -3,10 +3,13 @@ const router = express.Router();
 const pool = require("../database");
 const { isLoggedIn } = require("../lib/auth");
 
+// Ruta par agregar nueva list
 router.get("/add", isLoggedIn, (req, res) => {
+  //nos renderiza la vista para poder agregar nuevas list
   res.render("list/add");
 });
 
+// Agregar nueva lista
 router.post("/add", isLoggedIn, async (req, res) => {
   const { title, description } = req.body;
   const newList = {
@@ -14,11 +17,13 @@ router.post("/add", isLoggedIn, async (req, res) => {
     description,
     user_id: req.user.id
   };
+  // inserta los datos de title, description y user_id
   await pool.query("INSERT INTO list SET?", [newList]);
   req.flash("success", "TODO saved successfully");
   res.redirect("/list");
 });
 
+// mostrar todas las list que guarde
 router.get("/", isLoggedIn, async (req, res) => {
   const lists = await pool.query("SELECT * FROM list WHERE user_id = ?", [req.user.id]);
   res.render("list/list", { lists });

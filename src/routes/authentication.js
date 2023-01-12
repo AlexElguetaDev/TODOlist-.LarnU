@@ -38,13 +38,15 @@ router.get("/profile", isLoggedIn, (req, res) => {
 
 router.get("/profile/:id", isLoggedIn, async (req, res) => {
   const { id } = req.params;
-  const user = await pool.query("SELECT * FROM list WHERE id = ?", [id]);
+  const user = await pool.query("SELECT * FROM users WHERE id = ?", [id]);
+  console.log("usuario que editaremos es",user);
   res.render("list/editpass", {users : user[0]});
 });
 
 router.post("/profile/:id", isLoggedIn, async (req, res) => {
   const { id } = req.params;
   const { password } = req.body;
+  console.log("la nueva pass es", password);
   const newPass = await helpers.encryptPassword(password);
   await pool.query("UPDATE users SET password=? WHERE id=?", [newPass, id]);
   req.flash("success", "Password Update successfully");
